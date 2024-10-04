@@ -18,7 +18,7 @@ app.timer('timerTrigger1', {
           }
           
 
-        function lowEventDispatcher(event, tags)
+        function lowEventDispatcher(user, event, tags)
         //25% chance of sending an event
         {
             eventrandomiser = getRandomInt(12);
@@ -28,12 +28,12 @@ app.timer('timerTrigger1', {
             }
         }     
         
-        function normalEventDispatcher(event, tags)
+        function normalEventDispatcher(user, event, tags)
         //50% chance of sending an event
         {
             eventrandomiser = getRandomInt(10);
             if (eventrandomiser > 5) {
-                user.trackEvent(event, tags);
+                user.trackEvent(user, event, tags);
                 console.log('OPTI normalevent dispatched');
             }
         }   
@@ -60,7 +60,7 @@ app.timer('timerTrigger1', {
 
             let hasOnFlags = false;
             //for (let i = 0; i < 1; i++) {
-            for (let i = 0; i < getRandomInt(50); i++) {
+            for (let i = 0; i < getRandomInt(150); i++) {
                 // to get rapid demo results, generate random users. Each user always sees the same variation unless you reconfigure the flag rule.
                 const userId = (Math.floor(Math.random() * (10000 - 1000) + 1000)).toString();
 
@@ -87,19 +87,19 @@ app.timer('timerTrigger1', {
                 }
 
                 if (decision.variationKey === "control") {
-                    lowEventDispatcher('completed_purchase', tags); 
-                    lowEventDispatcher('add_to_cart'); 
-                    lowEventDispatcher('checkout_started');
+                    lowEventDispatcher(user, 'completed_purchase', tags); 
+                    lowEventDispatcher(user, 'add_to_cart'); 
+                    lowEventDispatcher(user, 'checkout_started');
                 }
                 if (decision.variationKey === "variation_1") {
-                    highEventDispatcher('completed_purchase', tags);
-                    highEventDispatcher('add_to_cart');
-                    highEventDispatcher('checkout_started');
+                    highEventDispatcher(user, 'completed_purchase', tags);
+                    highEventDispatcher(user, 'add_to_cart');
+                    highEventDispatcher(user, 'checkout_started');
                 }
                 if (decision.variationKey === "variation_2") {
-                    normalEventDispatcher('completed_purchase', tags);
-                    normalEventDispatcher('add_to_cart');
-                    normalEventDispatcher('checkout_started');
+                    normalEventDispatcher(user, 'completed_purchase', tags);
+                    normalEventDispatcher(user, 'add_to_cart');
+                    normalEventDispatcher(user, 'checkout_started');
                 }
             //     // randomise conversion events to generate more interesting results
             //     eventrandomiser = getRandomInt(3);
