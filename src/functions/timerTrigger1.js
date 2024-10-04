@@ -2,8 +2,8 @@ const { app } = require('@azure/functions');
 const optimizelySdk = require('@optimizely/optimizely-sdk');
 
 app.timer('timerTrigger1', {
-    //schedule: '0 */5 * * * *',
-    schedule: '0 */30 * * * *',
+    //schedule: '0 */5 * * * *', //DEBUG
+    schedule: '0 */15 * * * *',
     handler: (myTimer, context) => {
         //context.log('Timer function processed request.');
 
@@ -24,7 +24,7 @@ app.timer('timerTrigger1', {
             eventrandomiser = getRandomInt(12);
             if (eventrandomiser <= 3) {
                 user.trackEvent(event, tags);
-                console.log('OPTI lowevent dispatched');
+                console.log('OPTI lowevent dispatched ', event, ' ', tags);
             }
         }     
         
@@ -33,8 +33,8 @@ app.timer('timerTrigger1', {
         {
             eventrandomiser = getRandomInt(10);
             if (eventrandomiser > 5) {
-                user.trackEvent(user, event, tags);
-                console.log('OPTI normalevent dispatched');
+                user.trackEvent(event, tags);
+                console.log('OPTI normalevent dispatched', event, ' ', tags);
             }
         }   
         
@@ -43,8 +43,8 @@ app.timer('timerTrigger1', {
         {
             eventrandomiser = getRandomInt(12);
             if (eventrandomiser <= 9) {
-                user.trackEvent(user, event, tags);
-                console.log('OPTI highevent dispatched');
+                user.trackEvent(event, tags);
+                console.log('OPTI highevent dispatched', event, ' ', tags);
             }
         }     
 
