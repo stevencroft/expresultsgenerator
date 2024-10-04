@@ -38,12 +38,12 @@ app.timer('timerTrigger1', {
             }
         }   
         
-        function highEventDispatcher(event, tags)
+        function highEventDispatcher(user, event, tags)
         //75% chance of sending an event
         {
             eventrandomiser = getRandomInt(12);
             if (eventrandomiser <= 9) {
-                user.trackEvent(event, tags);
+                user.trackEvent(user, event, tags);
                 console.log('OPTI highevent dispatched');
             }
         }     
