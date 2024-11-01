@@ -60,7 +60,7 @@ app.timer('timerTrigger1', {
 
             let hasOnFlags = false;
             //for (let i = 0; i < 1; i++) {
-            for (let i = 0; i < getRandomInt(150); i++) {
+            for (let i = 0; i < getRandomIntInclusive(75, 200); i++) {
                 // to get rapid demo results, generate random users. Each user always sees the same variation unless you reconfigure the flag rule.
                 const userId = (Math.floor(Math.random() * (10000 - 1000) + 1000)).toString();
 
@@ -86,7 +86,7 @@ app.timer('timerTrigger1', {
                     hasOnFlags = true;
                 }
 
-                if (decision.variationKey === "control") {
+                if (decision.variationKey === "off") {
                     lowEventDispatcher(user, 'completed_purchase', tags); 
                     lowEventDispatcher(user, 'add_to_cart'); 
                     lowEventDispatcher(user, 'checkout_started');
