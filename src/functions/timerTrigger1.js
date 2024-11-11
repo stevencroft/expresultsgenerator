@@ -31,7 +31,7 @@ app.timer('timerTrigger1', {
             eventrandomiser = getRandomInt(12);
             if (eventrandomiser <= 3) {
                 user.trackEvent(event, tags);
-                console.log('OPTI lowevent dispatched ', event, ' ', tags);
+                console.log('OPTI lowevent dispatched ', event, ' tags if present ', tags);
             }
         }     
         
@@ -41,7 +41,7 @@ app.timer('timerTrigger1', {
             eventrandomiser = getRandomInt(10);
             if (eventrandomiser > 5) {
                 user.trackEvent(event, tags);
-                console.log('OPTI normalevent dispatched', event, ' ', tags);
+                console.log('OPTI normalevent dispatched', event, 'tags if present ', tags);
             }
         }   
         
@@ -51,7 +51,7 @@ app.timer('timerTrigger1', {
             eventrandomiser = getRandomInt(12);
             if (eventrandomiser <= 9) {
                 user.trackEvent(event, tags);
-                console.log('OPTI highevent dispatched', event, ' ', tags);
+                console.log('OPTI highevent dispatched', event, 'tags if present ', tags);
             }
         }     
 
@@ -85,7 +85,8 @@ app.timer('timerTrigger1', {
                     $opt_event_properties: properties,
                     revenue: getRandomIntInclusive(3000,12000) // $30-$120
                   };
-                console.log('OPTI event properties: ', properties); 
+                //console.log('OPTI event properties: ', properties); 
+                //console.log('OPTI event tags: ', tags);
 
                 // Corresponds to a flag key in your Optimizely project
                 const decision = user.decide('abandoned_cart');
@@ -102,18 +103,18 @@ app.timer('timerTrigger1', {
                 }
 
                 if (decision.variationKey === "off") {
-                    lowEventDispatcher(user, 'completed_purchase', tags); 
-                    lowEventDispatcher(user, 'add_to_cart'); 
+                    lowEventDispatcher(user, 'completed_purchase'); 
+                    lowEventDispatcher(user, 'add_to_cart', tags); 
                     lowEventDispatcher(user, 'checkout_started');
                 }
                 if (decision.variationKey === "variation_1") {
-                    highEventDispatcher(user, 'completed_purchase', tags);
-                    highEventDispatcher(user, 'add_to_cart');
+                    highEventDispatcher(user, 'completed_purchase');
+                    highEventDispatcher(user, 'add_to_cart', tags);
                     highEventDispatcher(user, 'checkout_started');
                 }
                 if (decision.variationKey === "variation_2") {
-                    normalEventDispatcher(user, 'completed_purchase', tags);
-                    normalEventDispatcher(user, 'add_to_cart');
+                    normalEventDispatcher(user, 'completed_purchase');
+                    normalEventDispatcher(user, 'add_to_cart', tags);
                     normalEventDispatcher(user, 'checkout_started');
                 }
             }
